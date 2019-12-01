@@ -24,23 +24,27 @@
 </style>
 <script>
     function gettingJSON(){
-    	console.log("Hi")
     	// Use the OpenWeather API to return:
     	//  the current temperature 
     	//  the high temperature for the day
     	//  the low temperature for the day
     	//  the icon for the current weather.
 		var YourWeatherAppID = '318f31fd15810fe42b21f896c93c2779'
-
+		var city = "Ann+Arbor"
+		var units = "imperial"
 
     	// You will need to update this query with the city, weather format (Celsius or Fahrenheit) and your OpenWeatherMap ID
     	 
     	// Right now I have it set to Chicago.  The default should be Ann Arbor/Fahreheit.
-		let query = "http://api.openweathermap.org/data/2.5/weather?q=Chicago&APPID=" +YourWeatherAppID;
+		let query = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID="+YourWeatherAppID+"&units="+units;
         console.log("Query is :" + query)
 
         $.getJSON(query,function(json){
             console.log(JSON.stringify(json));
+			$("#loc").html(json.name);
+			$("#temp").html(json["main"].temp);
+			$("#high").html(json["main"].temp_max);
+			$("#low").html(json["main"].temp_min);
     })
     }
     </script>
