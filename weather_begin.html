@@ -29,18 +29,37 @@
     	//  the high temperature for the day
     	//  the low temperature for the day
     	//  the icon for the current weather.
-		var YourWeatherAppID = '318f31fd15810fe42b21f896c93c2779'
-		var city = "Ann+Arbor"
-		var units = "imperial"
-
+		var YourWeatherAppID = '318f31fd15810fe42b21f896c93c2779';
+		var location = $("#location");
+		var f = $("fahrenheit");
+		var c = $("#celcius");
+		if ((location.val().length) == 0){
+		var city = "Ann+Arbor";
+		}
+		else{
+			var city = location.val();
+		}
+		if((f.is(":checked"))){
+			var units = "imperial";
+		}
+		if((c.is(":checked"))){
+			var units = "metric";
+		}
+		else{
+			var units = "imperial";
+		}
+		
+		
+		console.log(city);
     	// You will need to update this query with the city, weather format (Celsius or Fahrenheit) and your OpenWeatherMap ID
     	 
     	// Right now I have it set to Chicago.  The default should be Ann Arbor/Fahreheit.
 		let query = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID="+YourWeatherAppID+"&units="+units;
-        console.log("Query is :" + query)
+        console.log("Query is :" + query);
 
         $.getJSON(query,function(json){
             console.log(JSON.stringify(json));
+			$('#tempImg').attr('src', "http://openweathermap.org/img/wn/" + json.weather[0]['icon'] + '@2x.png');
 			$("#loc").html(json.name);
 			$("#temp").html(json["main"].temp);
 			$("#high").html(json["main"].temp_max);
