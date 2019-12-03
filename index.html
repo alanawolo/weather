@@ -11,6 +11,7 @@
 	}
 	#forecast{
 		text-align: center;
+		display: none;
 		/*This div should not appear until the weather is returned.*/
 	}
 	#forecast div{
@@ -65,6 +66,7 @@
 			$("#temp").html(json["main"].temp);
 			$("#high").html(json["main"].temp_max);
 			$("#low").html(json["main"].temp_min);
+			$("#forecast").css("display","block");
     })
     }
     </script>
